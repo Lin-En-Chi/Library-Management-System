@@ -7,6 +7,7 @@ django-simple-captcha==0.6.3
 et_xmlfile==2.0.0
 fonttools==4.61.1
 graphviz==0.21
+gunicorn==26.0.0
 kiwisolver==1.4.9
 matplotlib==3.10.8
 numpy==2.4.2
