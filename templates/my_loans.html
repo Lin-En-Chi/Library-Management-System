@@ -1,0 +1,65 @@
+{% extends 'base.html' %} 
+{% load static %}
+  
+{% block title %}個人借閱資訊{% endblock %} 
+  
+{% block content %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <h2>{{ user.username }} 的借閱資訊</h2> 
+    
+    <div class="container">
+        <div class="item" style="background-color:dodgerblue;">
+            <p style="color: white; font-size: 15px; margin-left: 10px;">借閱中</p>
+            <p style="color: white; font-size: 20px; margin-left: 10px;">{{ current_loans|length }}</p>
+        </div>
+        <div class="item" style="background-color:red">
+            <p style="color: white; font-size: 15px; margin-left: 10px;">逾期未還</p>
+            <p style="color: white; font-size: 20px; margin-left: 10px;">{{ overdue_count }}</p>
+        </div>
+        <div class="item" style="background-color:forestgreen">
+            <p style="color: white; font-size: 15px; margin-left: 10px;">預約中</p>
+            <p style="color: white; font-size: 20px; margin-left: 10px;">{{ reservations|length }}</p>
+        </div>
+    </div>
+
+
+    <!-- 目前借閱中（含還書按鈕） --> 
+    <h4>目前借閱中</h4> 
+    {% for loan in current_loans %} 
+        <div style="margin-left: 80px; margin-bottom: 10px;"> 
+            《{{ loan.book.title }}》 
+            借書日：{{ loan.borrow_date }} | 
+            應還日：{{ loan.due_date }} 
+            {% if loan.due_date < today %} 
+                <span style="color: red;">已逾期</span> 
+            {% endif %} 
+            <a href="/return/{{ loan.id }}/" class="btn" style="margin-left: 10px;">還書</a> 
+        </div> 
+    {% empty %} 
+        <p>目前沒有借閱中的書</p> 
+    {% endfor %} 
+  
+    <!-- 預約中 --> 
+    <h4>預約中</h4> 
+    {% for r in reservations %} 
+        <p>《{{ r.book.title }}》 — 預約日：{{ r.reservation_date }}</p> 
+    {% empty %} 
+        <p>沒有預約的書</p> 
+    {% endfor %} 
+  
+    <!-- 借閱歷史紀錄 --> 
+    <h4>借閱歷史紀錄</h4> 
+    {% for loan in history_loans %} 
+        <p> 
+            《{{ loan.book.title }}》 — 
+            借於 {{ loan.borrow_date }}， 
+            還於 {{ loan.return_date }} 
+        </p> 
+    {% empty %}
+        <p>尚無借閱歷史紀錄</p>
+    {% endfor %} 
+  
+    <br>
+    <a href="javascript:history.back()" class="btn">回上頁</a> 
+{% endblock %}

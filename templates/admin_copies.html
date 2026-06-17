@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}管理副本 - {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+    <h2>📦 管理副本</h2>
+    <div class="book-summary">
+        <h3>{{ book.title }}</h3>
+        <p>ISBN：{{ book.isbn }} | 作者：{{ book.author|default:"—" }}</p>
+    </div>
+
+    {% if message %}<p class="info-msg">{{ message }}</p>{% endif %}
+
+    <div class="add-copy-section">
+        <h4>新增副本</h4>
+        <form method="post" class="inline-form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add">
+            <label>數量：</label>
+            <input type="number" name="count" value="1" min="1" max="100">
+            <button type="submit" class="btn-primary">新增</button>
+        </form>
+    </div>
+
+    <h4>現有副本（共 {{ copies|length }} 本）</h4>
+    {% if copies %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>副本 ID</th>
+                    <th>狀態</th>
+                    <th>動作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for copy in copies %}
+                <tr>
+                    <td>#{{ copy.id }}</td>
+                    <td>
+                        {% if copy.status == 'available' %}
+                            <span class="badge badge-green">可借閱</span>
+                        {% elif copy.status == 'borrowed' %}
+                            <span class="badge badge-orange">已借出</span>
+                        {% else %}
+                            <span class="badge badge-red">{{ copy.get_status_display }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if copy.status != 'borrowed' %}
+                        <form method="post" style="display:inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="copy_id" value="{{ copy.id }}">
+                            <button type="submit" class="btn-small btn-danger"
+                                onclick="return confirm('確定要刪除這個副本嗎？')">刪除</button>
+                        </form>
+                        {% else %}
+                            <span class="text-muted">借出中無法刪除</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty">此書尚未建立任何副本。</p>
+    {% endif %}
+
+    <div class="action-row">
+        <a href="/admin_books/" class="btn-secondary">回書籍列表</a>
+    </div>
+</div>
+{% endblock %}

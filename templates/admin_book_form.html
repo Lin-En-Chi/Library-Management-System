@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if is_edit %}編輯書籍{% else %}新增書籍{% endif %}{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>{% if is_edit %}✏️ 編輯書籍{% else %}➕ 新增書籍{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <label>ISBN：</label>
+            {% if is_edit %}
+                <input type="text" value="{{ book.isbn }}" disabled>
+                <small>（ISBN 為主鍵，無法修改）</small>
+            {% else %}
+                <input type="text" name="isbn" required>
+            {% endif %}
+        </div>
+        <div class="form-row">
+            <label>書名：</label>
+            <input type="text" name="title" value="{{ book.title|default:'' }}" required>
+        </div>
+        <div class="form-row">
+            <label>作者：</label>
+            <input type="text" name="author" value="{{ book.author|default:'' }}">
+        </div>
+        <div class="form-row">
+            <label>出版社：</label>
+            <input type="text" name="publisher" value="{{ book.publisher|default:'' }}">
+        </div>
+        <div class="form-row">
+            <label>出版日期：</label>
+            <input type="date" name="publish_date" value="{{ book.publish_date|date:'Y-m-d' }}">
+        </div>
+        <div class="form-row">
+            <label>分類：</label>
+            <input type="text" name="category" value="{{ book.category|default:'' }}" placeholder="例如：文學、科普、歷史">
+        </div>
+        <div class="form-row">
+            <label>館藏位置：</label>
+            <input type="text" name="location" value="{{ book.location|default:'' }}" placeholder="例如：B2-架03">
+        </div>
+        {% if message %}<p class="error">{{ message }}</p>{% endif %}
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">{% if is_edit %}更新{% else %}新增{% endif %}</button>
+            <a href="/admin_books/" class="btn-secondary">回上頁</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

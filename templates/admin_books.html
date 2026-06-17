@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}管理書籍{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+    <div class="page-header">
+        <h2>📚 管理書籍</h2>
+        <a href="/admin_book_add/" class="btn-primary">+ 新增書籍</a>
+    </div>
+
+    {% if books %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>書名</th>
+                    <th>作者</th>
+                    <th>出版社</th>
+                    <th>分類</th>
+                    <th>副本</th>
+                    <th>動作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author|default:"—" }}</td>
+                    <td>{{ book.publisher|default:"—" }}</td>
+                    <td>{{ book.category|default:"—" }}</td>
+                    <td>
+                        <span class="badge {% if book.available_copies > 0 %}badge-green{% else %}badge-red{% endif %}">
+                            {{ book.available_copies }}/{{ book.total_copies }}
+                        </span>
+                    </td>
+                    <td class="action-cell">
+                        <a href="/admin_book_edit/{{ book.isbn }}/" class="btn-small">編輯</a>
+                        <a href="/admin_copies/{{ book.isbn }}/" class="btn-small">副本</a>
+                        <a href="/admin_book_delete/{{ book.isbn }}/" class="btn-small btn-danger"
+                           onclick="return confirm('確定要刪除這本書嗎？此動作將連帶刪除所有副本！')">刪除</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty">目前還沒有任何書籍。</p>
+    {% endif %}
+
+    <div class="action-row">
+        <a href="/adminmain/" class="btn-secondary">回管理主頁</a>
+    </div>
+</div>
+{% endblock %}

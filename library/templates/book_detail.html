@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+{% load static %}
+  
+{% block title %}{{ book.title }}{% endblock %} 
+  
+{% block content %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <section>
+        <h2>書籍資訊</h2> 
+
+        <h3>{{ book.title }}</h3> 
+        <p>ISBN：{{ book.isbn }}</p> 
+        <p>作者：{{ book.author }}</p> 
+        <p>出版社：{{ book.publisher }}</p> 
+        <p>出版日期：{{ book.publish_date }}</p> 
+        <p>分類：{{ book.category }}</p> 
+        <p>館藏位置：{{ book.location }}</p> 
+        <p>狀態：可借 {{ available }} / 共 {{ total }} 本</p>
+    </section>
+
+    <!-- 借書 / 預約按鈕邏輯 --> 
+    <br>
+    {% if user.is_authenticated %} 
+        {% if available > 0 %} 
+            <a href="/borrow/{{ book.isbn }}/" class="btn">借書</a> 
+        {% else %} 
+            {% if has_reserved %} 
+                <span style="margin-left: 80px;">已預約</span> 
+            {% else %} 
+                <a href="/reserve/{{ book.isbn }}/" class="btn">預約</a> 
+            {% endif %} 
+        {% endif %} 
+    {% endif %} 
+    <a href="javascript:history.back()" class="btn">回上頁</a> 
+{% endblock %}

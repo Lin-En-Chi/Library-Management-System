@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}所有借閱記錄{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+    <h2>📋 所有借閱記錄</h2>
+
+    <div class="filter-row">
+        <a href="/admin_loans/?filter=all" class="filter-btn {% if filter_type == 'all' %}active{% endif %}">全部</a>
+        <a href="/admin_loans/?filter=active" class="filter-btn {% if filter_type == 'active' %}active{% endif %}">借閱中</a>
+        <a href="/admin_loans/?filter=returned" class="filter-btn {% if filter_type == 'returned' %}active{% endif %}">已歸還</a>
+    </div>
+
+    {% if loans %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Loan ID</th>
+                    <th>借閱者</th>
+                    <th>書名</th>
+                    <th>副本</th>
+                    <th>借書日</th>
+                    <th>應還日</th>
+                    <th>歸還日</th>
+                    <th>狀態</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for loan in loans %}
+                <tr>
+                    <td>#{{ loan.id }}</td>
+                    <td>{{ loan.user.username }}</td>
+                    <td>{{ loan.book.title }}</td>
+                    <td>#{{ loan.copy.id }}</td>
+                    <td>{{ loan.borrow_date }}</td>
+                    <td>{{ loan.due_date }}</td>
+                    <td>{{ loan.return_date|default:"—" }}</td>
+                    <td>
+                        {% if loan.return_date %}
+                            <span class="badge badge-gray">已歸還</span>
+                        {% elif loan.due_date < today %}
+                            <span class="badge badge-red">已逾期</span>
+                        {% else %}
+                            <span class="badge badge-green">借閱中</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty">沒有符合條件的借閱記錄。</p>
+    {% endif %}
+
+    <div class="action-row">
+        <a href="/adminmain/" class="btn-secondary">回管理主頁</a>
+    </div>
+</div>
+{% endblock %}

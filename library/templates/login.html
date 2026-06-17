@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% load static %}
+  
+{% block title %}會員登入{% endblock %} 
+  
+{% block content %} 
+<link rel="stylesheet" href="{% static 'css/login_and_registor_style.css' %}">
+
+    <div class="container">
+        <div class="item auth-card">
+            <h2>會員登入</h2>
+
+            <form method="post" action="/login/"> 
+                {% csrf_token %} 
+                
+                <br>
+                <div class="form-row">
+                    <label>帳號：</label> 
+                    <input name="username" type="text" required>
+                </div>
+                
+                <div class="form-row">
+                    <label>密碼：</label> 
+                    <input name="password" type="password" required>
+                </div>
+                 
+                <button type="submit">登入</button>
+                <br><br>
+                <a href="/index/" class="btn">回上頁</a>
+            </form> 
+            
+            <!-- 顯示錯誤訊息（如登入失敗） --> 
+            {% if message %} 
+                <p style="color: red;">{{ message }}</p> 
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

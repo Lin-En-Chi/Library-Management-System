@@ -1,0 +1,217 @@
+@charset "UTF-8";
+body{
+    background-color:white;
+}
+h2{
+    background-image: url(../images/gradient.png);
+    background-size: cover;
+    height: 120px;
+    color:white;
+    font-size: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 10px 70px 10px 70px;
+    padding-left: 40px;
+    padding-top: 40px;
+    border-radius: 20px;
+}
+h3{
+    margin-left: 75px;
+    color:black;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h4{
+    margin-left: 80px;
+    color:black;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+p{
+    margin-left: 80px;
+    color:black;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a:link {
+    margin-left: 80px;
+    padding: 8px; /* 讓按鈕有一點上下間距，比較好點擊 */
+    color:black;
+}
+a:hover {
+    margin-left: 80px;
+    padding: 8px; /* 讓按鈕有一點上下間距，比較好點擊 */
+    text-decoration: none;
+    color:blueviolet;
+}
+a:active{
+    margin-left: 80px;
+    padding: 8px; /* 讓按鈕有一點上下間距，比較好點擊 */
+    text-decoration: none;
+    color:blueviolet;
+}
+label{
+    margin-left: 80px;
+}
+button{
+    margin-left: 80px;
+    background-color:white;
+    border-color:blueviolet;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 3px;
+    color:blueviolet;
+}
+
+button:hover {
+    margin-left: 80px;
+    background-color:antiquewhite;
+    border-color:blueviolet;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 3px;
+    color:blueviolet;
+}
+button.submit{
+    margin-left: 80px;
+    background-color:white;
+    border-color:blueviolet;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 3px;
+    color:blueviolet;
+}
+button.submit:hover {
+    margin-left: 80px;
+    background-color:antiquewhite;
+    border-color:blueviolet;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 3px;
+    color:blueviolet;
+}
+.container{
+    margin: 20px 70px 10px 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+}
+.item{
+    width: 30%;
+    height: max-content;
+    font-size: 15px;
+    margin-left: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+/* 首頁三個介紹卡：置中、自動高度避免文字溢出 */
+.info-card{
+    text-align: center;
+    min-height: 110px;
+    padding: 15px 12px;
+    box-sizing: border-box;
+}
+.info-card p{
+    margin-left: 0 !important;
+    text-align: center;
+}
+
+section.marquee{
+    margin-left: 70px;
+    margin-right: 70px;
+    border-color: lightgray;
+    border-width: thin;
+    border-style: solid;
+    border-radius: 10px;
+    height: max-content;
+    overflow: hidden;
+}
+
+/* 跑馬燈滾動動畫 */
+.marquee-track{
+    display: inline-flex;
+    white-space: nowrap;
+    animation: marquee-scroll 30s linear infinite;
+    padding-left: 20px;
+}
+.marquee-track:hover{
+    animation-play-state: paused;
+}
+.marquee-track a{
+    margin-left: 0 !important;
+    padding: 0 30px;
+    color: #6a1b9a;
+    white-space: nowrap;
+}
+@keyframes marquee-scroll{
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+
+}
+/* 查書頁的館藏表格 */
+.book-table{
+    margin: 10px 70px;
+    border-collapse: collapse;
+    width: calc(100% - 140px);
+    font-size: 14px;
+}
+.book-table th{
+    background-color: #6a1b9a;
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+}
+.book-table td{
+    padding: 8px 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.book-table tr:nth-child(even){
+    background-color: #f7f3fa;
+}
+.book-table a{
+    margin-left: 0;
+    color: #6a1b9a;
+}
+
+/* 使用手冊內文 */
+.manual-body{
+    margin: 0 70px;
+    line-height: 1.8;
+}
+.manual-body h3{
+    margin-left: 0;
+    margin-top: 25px;
+    color: #6a1b9a;
+    border-bottom: 2px solid #e0d0ea;
+    padding-bottom: 5px;
+}
+.manual-body h4{
+    margin-left: 0;
+    margin-top: 15px;
+    color: #333;
+}
+.manual-body p{
+    margin-left: 0;
+}
+
+/* 查書頁：統一左邊距 70px 對齊 */
+.search-form{
+    margin-left: 70px;
+    margin-bottom: 10px;
+}
+.search-form label{
+    margin-left: 0;
+}
+.search-form button{
+    margin-left: 10px;
+}
+.collection-title{
+    margin-left: 70px;
+}
+.book-table{
+    margin-left: 70px;
+}

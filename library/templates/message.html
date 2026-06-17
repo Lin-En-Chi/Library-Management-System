@@ -1,0 +1,12 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}系統訊息{% endblock %} 
+{% block content %} 
+<link rel="stylesheet" href="{% static 'css/message_style.css' %}">
+
+<h2>系統訊息</h2>
+<p>{{ message }}</p> 
+<a href="/index/" class="btn">回首頁</a>
+<a href="/my_loans/" class="btn">我的借閱</a>
+<br>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %} 
+{% load static %}
+  
+{% block title %}首頁{% endblock %} 
+  
+{% block content %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <h2>歡迎回來，{{ user.username }}！</h2> 
+
+    <!-- 跑馬燈（同 index.html） --> 
+    <br><br>
+    <section class="marquee"> 
+        <h4><img src="{% static 'images/popular_book_icon.png' %}" style="width:20px; height:20px; vertical-align:middle;"> 熱門書籍</h4> 
+        <div class="marquee-track"> 
+            {% for book in hot_books %} 
+                <a href="/book/{{ book.isbn }}/"> 
+                    《{{ book.title }}》— {{ book.author }} 
+                </a> 
+            {% endfor %} 
+            {% for book in hot_books %} 
+                <a href="/book/{{ book.isbn }}/"> 
+                    《{{ book.title }}》— {{ book.author }} 
+                </a> 
+            {% endfor %} 
+        </div> 
+    </section> 
+
+    <div class="container">
+        <div class="item info-card" style="background-color:lightblue;">
+            <p style="color:black; font-size: 18px;">
+                <img src="{% static 'images/icon_book.svg' %}" style="width:20px; height:20px; vertical-align:middle;"> 豐富館藏
+            </p>
+            <p style="color:black; font-size: 12px;"> 30 本書籍，涵蓋文學、科普、經濟、心理等多個領域</p> 
+        </div>
+        <div class="item info-card" style="background-color:lightgreen;">
+            <p style="color:black; font-size: 18px;">
+                <img src="{% static 'images/icon_search.svg' %}" style="width:20px; height:20px; vertical-align:middle;"> 便捷搜尋
+            </p>
+            <p style="color:black; font-size: 12px;"> 快速查詢書籍資訊，即時查看館藏狀態和位置</p> 
+        </div>
+        <div class="item info-card" style="background-color:plum;">
+            <p style="color:black; font-size: 18px;">
+                <img src="{% static 'images/icon_trend.svg' %}" style="width:20px; height:20px; vertical-align:middle;"> 線上管理
+            </p>
+            <p style="color:black; font-size: 12px;"> 登入後可線上借閱、預約書籍，隨時查看借閱記錄</p> 
+        </div>
+    </div>
+    
+{% endblock %}

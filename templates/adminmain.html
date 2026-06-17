@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}管理員主頁{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard">
+    <h2>⚙️ 管理員主頁</h2>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <h4>書籍總數</h4>
+            <p class="stat-number">{{ total_books }}</p>
+        </div>
+        <div class="stat-card">
+            <h4>副本總數</h4>
+            <p class="stat-number">{{ total_copies }}</p>
+        </div>
+        <div class="stat-card">
+            <h4>借閱中</h4>
+            <p class="stat-number">{{ total_loans }}</p>
+        </div>
+        <div class="stat-card">
+            <h4>會員總數</h4>
+            <p class="stat-number">{{ total_users }}</p>
+        </div>
+    </div>
+
+    <div class="admin-actions">
+        <a href="/admin_books/" class="card">
+            <h4>📚 管理書籍</h4>
+            <p>新增、編輯、刪除書籍，管理副本</p>
+        </a>
+        <a href="/admin_loans/" class="card">
+            <h4>📋 借閱記錄</h4>
+            <p>查看所有借閱記錄與歸還狀態</p>
+        </a>
+        <a href="/index/" class="card">
+            <h4>🏠 回讀者首頁</h4>
+            <p>切換到讀者介面</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
