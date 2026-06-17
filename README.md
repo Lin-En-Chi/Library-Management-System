@@ -1,6 +1,5 @@
 # 圖書館管理系統 (Library Management System)
 
-資料庫系統管理期末報告 — Phase 2 系統實作
 
 ## 啟動方式
 
@@ -14,7 +13,7 @@ pip install "django>=3.2"
 python manage.py migrate
 ```
 
-### 3. 匯入同學提供的資料（必跑）
+### 3. 匯入的資料
 ```bash
 python load_classmate_data.py
 ```
