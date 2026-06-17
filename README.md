@@ -66,7 +66,7 @@ python manage.py runserver
 - 管理副本
 - 查看所有借閱記錄
 
-## 資料庫架構（對應期中報告 Phase 1）
+## 資料庫架構
 
 | 期中 schema | Django Model | 說明 |
 | --- | --- | --- |
