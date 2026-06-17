@@ -71,8 +71,8 @@ python manage.py runserver
 | 期中 schema | Django Model | 說明 |
 | --- | --- | --- |
 | USER | UserProfile + User | 使用者，phone/state 放在 UserProfile |
-| BOOK | Book | ISBN 為主鍵 |
+| BOOK | Book | ISBN 為 Primary Key |
 | COPY | Copy | 一本書多個實體副本 |
 | LOAN | Loan | 借閱記錄 |
 | RESERVATION | Reservation | 預約記錄 |
-| SEARCH_LOG | SearchLog | 搜尋紀錄（解開 M:N） |
+| SEARCH_LOG | SearchLog | 搜尋紀錄 |
